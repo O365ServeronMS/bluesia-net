@@ -1,22 +1,28 @@
 # Git
 .git
-.gitignore
 
 # Design / source files
 DESIGN.md
-tokens.json
 theme.css
 variables.css
+
+# Nginx (không dùng nữa)
+nginx.conf
+
+# Node
+node_modules/
+package.json
+package-lock.json
+scripts/
 
 # Docker
 Dockerfile
 docker-compose.yml
 .dockerignore
 
-# OS
+# OS / Editor
 .DS_Store
 Thumbs.db
-
-# Editor
 .vscode
 *.md
+tokens.json

@@ -1,0 +1,61 @@
+# ── Caddy static file server (bên trong Docker container) ──────
+# Host Caddy (reverse proxy + SSL) → port 8080 → container này
+
+:80 {
+    root * /srv
+
+    # ── Static file server với pre-compressed support ──────────
+    file_server {
+        # Tự serve .gz nếu browser hỗ trợ Accept-Encoding: gzip
+        precompressed gzip
+    }
+
+    # ── Compression (fallback nếu file chưa pre-compress) ──────
+    encode {
+        zstd best
+        gzip 6
+        minimum_length 512
+    }
+
+    # ── Cache: images/fonts — 1 năm ────────────────────────────
+    @immutable {
+        path /assets/*
+    }
+    header @immutable {
+        Cache-Control "public, max-age=31536000, immutable"
+        Vary          "Accept-Encoding, Accept"
+    }
+
+    # ── Cache: CSS / JS — 7 ngày ───────────────────────────────
+    @csjs {
+        path *.css *.js
+    }
+    header @csjs {
+        Cache-Control "public, max-age=604800, stale-while-revalidate=86400"
+        Vary          "Accept-Encoding"
+    }
+
+    # ── Cache: HTML — không cache ──────────────────────────────
+    @html {
+        path /
+        path *.html
+    }
+    header @html Cache-Control "no-cache, no-store, must-revalidate"
+
+    # ── Cache: robots.txt / sitemap.xml — 1 ngày ───────────────
+    @seo {
+        path /robots.txt /sitemap.xml
+    }
+    header @seo Cache-Control "public, max-age=86400"
+
+    # ── SPA fallback: 404 → index.html ─────────────────────────
+    handle_errors 404 {
+        rewrite * /index.html
+        file_server
+    }
+
+    # ── Tắt access log (tránh noise, host Caddy đã log) ────────
+    log {
+        output discard
+    }
+}
