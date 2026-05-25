@@ -1,0 +1,26 @@
+bluesia.net, www.bluesia.net {
+    reverse_proxy localhost:8080
+
+    # Encode gzip/zstd
+    encode zstd gzip
+
+    # Security headers
+    header {
+        X-Frame-Options           "SAMEORIGIN"
+        X-Content-Type-Options    "nosniff"
+        X-XSS-Protection          "1; mode=block"
+        Referrer-Policy           "strict-origin-when-cross-origin"
+        Permissions-Policy        "camera=(), microphone=(), geolocation=()"
+        # Remove server fingerprint
+        -Server
+    }
+
+    # Logging
+    log {
+        output file /var/log/caddy/bluesia.net.log {
+            roll_size 10mb
+            roll_keep 5
+        }
+        format json
+    }
+}
