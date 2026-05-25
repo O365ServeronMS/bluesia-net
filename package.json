@@ -1,6 +1,6 @@
 {
   "name": "bluesia-net",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Bluesia.net landing page — static site",
   "type": "module",
   "scripts": {

@@ -3,11 +3,6 @@
 
 # Design / source files
 DESIGN.md
-theme.css
-variables.css
-
-# Nginx (không dùng nữa)
-nginx.conf
 
 # Node
 node_modules/
@@ -15,14 +10,17 @@ package.json
 package-lock.json
 scripts/
 
+# Raw PNG source images (avoid copying to container)
+assets/images/*.png
+
 # Docker
 Dockerfile
 docker-compose.yml
 .dockerignore
 
-# OS / Editor
+# OS / Editor / Markdown
 .DS_Store
 Thumbs.db
 .vscode
 *.md
-tokens.json
+
