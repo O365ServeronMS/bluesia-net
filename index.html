@@ -89,15 +89,16 @@
   .fade-in.visible{opacity:1;transform:translateY(0)}
   /* === STATS BAR === */
   .stats-bar{background:#0f0e12;padding:48px 0;position:relative;z-index:10}
+  /* === NAV MOBILE — ẩn ngay từ đầu, tránh flash overlay đen === */
+  .nav-mobile{display:none}
   </style>
 
-  <!-- ── Non-critical CSS: deferred ─────────────────────────── -->
-  <link rel="preload" href="css/base.css"  as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <link rel="preload" href="css/main.css"  as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript>
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/main.css" />
-  </noscript>
+  <!-- ── base.css: blocking (5.7KB — base layout, spacing, keyframes) ── -->
+  <link rel="stylesheet" href="css/base.css" />
+
+  <!-- ── main.css: deferred (31KB — component styles, below-fold) ──── -->
+  <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="css/main.css" /></noscript>
 
   <!-- ── Structured Data (JSON-LD) ──────────────────────────── -->
   <script type="application/ld+json">
