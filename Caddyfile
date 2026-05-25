@@ -1,26 +1,112 @@
+# ══════════════════════════════════════════════════════════════
+# Caddyfile — bluesia.net
+# Requires: standard Caddy v2 (tự động SSL qua Let's Encrypt)
+# Server-side 100MB cache: cần xcaddy với cache plugin (xem ghi chú bên dưới)
+# ══════════════════════════════════════════════════════════════
+
+# ── Global options ────────────────────────────────────────────
+{
+    # Email cho Let's Encrypt notifications
+    email admin@bluesia.net
+
+    # Bật HTTP/3 (QUIC)
+    servers {
+        protocols h1 h2 h3
+    }
+}
+
+# ── Virtual Host ──────────────────────────────────────────────
 bluesia.net, www.bluesia.net {
-    reverse_proxy localhost:8080
 
-    # Encode gzip/zstd
-    encode zstd gzip
+    # Reverse proxy đến Docker nginx container
+    reverse_proxy localhost:8080 {
+        # Health check nội bộ
+        health_uri      /
+        health_interval 30s
+        health_timeout  10s
 
-    # Security headers
+        # Flush headers ngay để giảm TTFB
+        flush_interval -1
+    }
+
+    # ── Encode (gzip + zstd) ──────────────────────────────────
+    encode {
+        zstd
+        gzip 6
+        minimum_length 512
+    }
+
+    # ── Browser cache headers (qua Caddy) ─────────────────────
+    @static {
+        path *.css *.js *.webp *.png *.jpg *.jpeg *.gif *.svg *.ico *.woff *.woff2
+    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
+    header @static Vary          "Accept-Encoding"
+
+    @html {
+        path /
+        path *.html
+    }
+    header @html Cache-Control "no-cache, no-store, must-revalidate"
+
+    # ── Security Headers ──────────────────────────────────────
     header {
         X-Frame-Options           "SAMEORIGIN"
         X-Content-Type-Options    "nosniff"
         X-XSS-Protection          "1; mode=block"
         Referrer-Policy           "strict-origin-when-cross-origin"
         Permissions-Policy        "camera=(), microphone=(), geolocation=()"
-        # Remove server fingerprint
+        # Preload hint cho LCP image
+        Link                      "</assets/images/hero-bg.webp>; rel=preload; as=image; type=image/webp"
         -Server
     }
 
-    # Logging
+    # ── Logging ───────────────────────────────────────────────
     log {
         output file /var/log/caddy/bluesia.net.log {
-            roll_size 10mb
-            roll_keep 5
+            roll_size    10mb
+            roll_keep    5
+            roll_keep_for 720h
         }
         format json
+        level  INFO
     }
 }
+
+# ══════════════════════════════════════════════════════════════
+# GHI CHÚ: Server-side cache 100MB
+# ══════════════════════════════════════════════════════════════
+# Standard Caddy không hỗ trợ server-side cache với giới hạn size.
+# Để bật 100MB server-side cache, cần build Caddy với xcaddy:
+#
+#   curl -sS https://webi.sh/xcaddy | sh
+#   xcaddy build --with github.com/caddyserver/cache-handler
+#
+# Sau đó thêm vào Caddyfile (trong global block):
+#
+#   {
+#       order cache before rewrite
+#       cache {
+#           ttl 1h
+#           stale 12h
+#           max_cachable_response_body_bytes 10485760
+#           nuts {
+#               path /var/cache/caddy
+#               configuration {
+#                   MaxSize 104857600
+#               }
+#           }
+#       }
+#   }
+#
+# Và thêm directive `cache` vào virtual host block:
+#
+#   bluesia.net {
+#       cache
+#       reverse_proxy localhost:8080
+#       ...
+#   }
+#
+# Tạo thư mục cache:
+#   mkdir -p /var/cache/caddy && chown caddy:caddy /var/cache/caddy
+# ══════════════════════════════════════════════════════════════
