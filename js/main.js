@@ -298,19 +298,28 @@ function initMobileNav() {
 
   hamburger.addEventListener('click', () => {
     mobileNav.classList.add('open');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    hamburger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    navClose?.focus();
   });
 
-  navClose?.addEventListener('click', () => {
+  const closeNav = () => {
     mobileNav.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
-  });
+  };
+
+  navClose?.addEventListener('click', closeNav);
 
   mobileNav.addEventListener('click', e => {
-    if (e.target === mobileNav) {
-      mobileNav.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    if (e.target === mobileNav) closeNav();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeNav();
   });
 }
 
@@ -492,17 +501,24 @@ function initCounters() {
 }
 
 function animateCounter(el) {
-  const target  = parseInt(el.dataset.count, 10);
-  const suffix  = el.dataset.suffix || '';
-  const prefix  = el.dataset.prefix || '';
+  const target   = parseInt(el.dataset.count, 10);
+  const suffix   = el.dataset.suffix || '';
+  const prefix   = el.dataset.prefix || '';
   const duration = 1800;
-  const start    = performance.now();
+
+  // Respect prefers-reduced-motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = prefix + target + suffix;
+    return;
+  }
+
+  const start = performance.now();
 
   function update(now) {
-    const elapsed = now - start;
+    const elapsed  = now - start;
     const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const value = Math.round(eased * target);
+    const eased    = 1 - Math.pow(1 - progress, 3);
+    const value    = Math.round(eased * target);
     el.textContent = prefix + value + suffix;
     if (progress < 1) requestAnimationFrame(update);
   }
@@ -547,7 +563,10 @@ function initContactForm() {
     await delay(1200);
 
     form.style.display = 'none';
-    if (success) success.classList.add('show');
+    if (success) {
+      success.removeAttribute('hidden');
+      success.classList.add('show');
+    }
   });
 }
 

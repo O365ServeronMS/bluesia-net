@@ -5,66 +5,135 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- ── SEO ──────────────────────────────────────────────── -->
-  <title>Bluesia — Nhà đầu tư Năng lượng Tái tạo Việt Nam</title>
+  <!-- ── SEO ─────────────────────────────────────────────────── -->
+  <title>Bluesia — Nhà đầu tư Năng lượng Tái tạo Việt Nam | Renewable Energy Investment</title>
   <meta name="description" content="Bluesia là nhà đầu tư tiên phong trong lĩnh vực năng lượng tái tạo tại Việt Nam. Chúng tôi phát triển và vận hành các dự án điện mặt trời, điện gió và thủy điện với tổng công suất hơn 500MW." />
   <meta name="keywords" content="năng lượng tái tạo, điện mặt trời, điện gió, thủy điện, đầu tư năng lượng, renewable energy Vietnam, Bluesia" />
   <meta name="author" content="Bluesia Investment Group" />
-  <link rel="canonical" href="https://bluesia.net" />
+  <link rel="canonical" href="https://bluesia.net/" />
 
-  <!-- ── Open Graph ────────────────────────────────────────── -->
+  <!-- ── Open Graph ──────────────────────────────────────────── -->
   <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://bluesia.net" />
+  <meta property="og:url"         content="https://bluesia.net/" />
   <meta property="og:title"       content="Bluesia — Nhà đầu tư Năng lượng Tái tạo Việt Nam" />
   <meta property="og:description" content="Tiên phong xây dựng hạ tầng năng lượng xanh tại Việt Nam. 500+ MW công suất. 15+ dự án. 12 tỉnh thành." />
-  <meta property="og:image"       content="https://bluesia.net/assets/images/hero-bg.png" />
+  <meta property="og:image"       content="https://bluesia.net/assets/images/hero-bg-960.webp" />
+  <meta property="og:image:width"  content="960" />
+  <meta property="og:image:height" content="640" />
+  <meta property="og:locale"      content="vi_VN" />
+  <meta property="og:site_name"   content="Bluesia" />
   <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content="Bluesia — Nhà đầu tư Năng lượng Tái tạo Việt Nam" />
+  <meta name="twitter:description" content="Tiên phong xây dựng hạ tầng năng lượng xanh tại Việt Nam. 500+ MW công suất." />
+  <meta name="twitter:image"      content="https://bluesia.net/assets/images/hero-bg-960.webp" />
 
-  <!-- ── Preload LCP image ────────────────────────────────── -->
-  <link rel="preload" as="image" href="assets/images/hero-bg.webp" type="image/webp" fetchpriority="high" />
+  <!-- ── Preload LCP Hero Image (AVIF preferred, 960w mobile-first) ── -->
+  <link rel="preload" as="image"
+        href="assets/images/hero-bg-960.avif"
+        type="image/avif"
+        imagesrcset="assets/images/hero-bg-640.avif 640w, assets/images/hero-bg-960.avif 960w"
+        imagesizes="100vw"
+        fetchpriority="high" />
 
-  <!-- ── Fonts: non-blocking ───────────────────────────────── -->
+  <!-- ── DNS Prefetch / Preconnect ──────────────────────────── -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" /></noscript>
 
-  <!-- ── CSS: variables + base blocking, main deferred ────── -->
+  <!-- ── Fonts: Non-blocking (font-display:swap via &display=swap) ── -->
+  <!-- Only load 3 weights used: 300, 400, 600 (removed 200,500,700) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+        media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" /></noscript>
+
+  <!-- ── CSS: variables + base INLINE (tiny, avoid extra RTT) ── -->
   <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="css/main.css" /></noscript>
 
-  <!-- ── Critical above-the-fold CSS (inline) ─────────────── -->
+  <!-- ── Critical above-the-fold CSS (inline) ───────────────── -->
   <style>
+  /* === RESET & BASE === */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#f0efe9;color:#0f0e12;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f0efe9;color:#0f0e12;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   img,video{max-width:100%;display:block}
-  picture{display:block;width:100%;height:100%}
-  .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;transition:background .5s,backdrop-filter .5s,box-shadow .5s}
+  picture{display:block}
+  a{text-decoration:none;color:inherit}
+  button{cursor:pointer;border:none;background:none;font:inherit}
+  /* === FOCUS VISIBLE === */
+  :focus-visible{outline:2px solid #c8a84b;outline-offset:3px;border-radius:2px}
+  /* === REDUCED MOTION === */
+  @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  /* === UTILITIES === */
+  .container{width:100%;max-width:1280px;margin:0 auto;padding:0 24px}
+  /* === NAVBAR === */
+  .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;transition:background .5s ease,backdrop-filter .5s ease,box-shadow .5s ease}
   .navbar.transparent{background:transparent}
-  .navbar.scrolled{background:rgba(15,14,18,.88);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 1px 0 rgba(255,255,255,.06),0 8px 32px rgba(15,14,18,.10)}
+  .navbar.scrolled{background:rgba(15,14,18,.88);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:0 1px 0 rgba(255,255,255,.06),0 8px 32px rgba(15,14,18,.10)}
+  /* === HERO === */
   .hero{position:relative;width:100%;height:100vh;min-height:680px;display:flex;align-items:flex-end;overflow:hidden}
-  .hero-bg{position:absolute;inset:0;z-index:0}
-  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 60%;transform:scale(1.04);transition:transform 8s cubic-bezier(0.25,0.1,0.25,1)}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:#0f0e12}
+  .hero-bg picture,.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+  .hero-bg img{transform:scale(1.04);transition:transform 8s cubic-bezier(.25,.1,.25,1)}
   .hero.loaded .hero-bg img{transform:scale(1)}
   .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(15,14,18,.30) 0%,rgba(15,14,18,.20) 30%,rgba(15,14,18,.55) 70%,rgba(15,14,18,.92) 100%)}
   .hero-content{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:0 24px 80px}
-  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 10px;border-radius:100px;border:1px solid rgba(200,168,75,.4);background:rgba(200,168,75,.1);backdrop-filter:blur(8px);margin-bottom:24px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#dbbf68}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 10px;border-radius:100px;border:1px solid rgba(200,168,75,.4);background:rgba(200,168,75,.1);backdrop-filter:blur(8px);margin-bottom:24px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#dbbf68}
   .badge-dot{width:6px;height:6px;border-radius:50%;background:#c8a84b;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
   @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-  .hero-title{font-size:clamp(40px,6vw,76px);font-weight:200;line-height:1.08;letter-spacing:-.02em;color:#fff;margin-bottom:24px;max-width:840px}
+  .hero-title{font-size:clamp(40px,6vw,76px);font-weight:300;line-height:1.08;letter-spacing:-.02em;color:#fff;margin-bottom:24px;max-width:840px}
   .hero-title-accent{background:linear-gradient(135deg,#3d9b66 0%,#dbbf68 60%,#c8a84b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
   .hero-subtitle{font-size:18px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.65);max-width:560px;margin-bottom:40px;letter-spacing:.01em}
   .hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  /* === FADE ANIMATIONS === */
   .fade-in{opacity:0;transform:translateY(24px);transition:opacity .5s cubic-bezier(0,0,.2,1),transform .5s cubic-bezier(0,0,.2,1)}
   .fade-in.visible{opacity:1;transform:translateY(0)}
+  /* === STATS BAR === */
   .stats-bar{background:#0f0e12;padding:48px 0;position:relative;z-index:10}
-  .container{width:100%;max-width:1280px;margin:0 auto;padding:0 24px}
   </style>
 
-  <!-- ── Favicon (SVG inline) ──────────────────────────────── -->
+  <!-- ── Non-critical CSS: deferred ─────────────────────────── -->
+  <link rel="preload" href="css/base.css"  as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" href="css/main.css"  as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/main.css" />
+  </noscript>
+
+  <!-- ── Structured Data (JSON-LD) ──────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Bluesia Investment Group",
+    "alternateName": "Bluesia",
+    "url": "https://bluesia.net",
+    "logo": "https://bluesia.net/assets/images/hero-bg-960.webp",
+    "description": "Nhà đầu tư tiên phong trong lĩnh vực năng lượng tái tạo tại Việt Nam. Phát triển và vận hành các dự án điện mặt trời, điện gió và thủy điện.",
+    "foundingDate": "2015",
+    "areaServed": "VN",
+    "knowsAbout": ["Solar Energy", "Wind Energy", "Hydropower", "Energy Storage", "Renewable Energy Investment"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "invest@bluesia.net",
+      "telephone": "+84-28-3822-0000",
+      "contactType": "investor relations",
+      "availableLanguage": ["Vietnamese", "English"]
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Nguyễn Huệ",
+      "addressLocality": "Quận 1",
+      "addressRegion": "TP. Hồ Chí Minh",
+      "addressCountry": "VN"
+    },
+    "sameAs": [
+      "https://linkedin.com",
+      "https://facebook.com"
+    ]
+  }
+  </script>
+
+  <!-- ── Favicon ─────────────────────────────────────────────── -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230f0e12'/><text x='16' y='22' font-family='Inter,sans-serif' font-size='18' font-weight='700' fill='%23c8a84b' text-anchor='middle'>B</text></svg>" />
 </head>
 <body>
@@ -77,9 +146,8 @@
 
     <!-- Brand -->
     <a href="#hero" class="nav-brand" aria-label="Bluesia — Trang chủ">
-      <svg class="nav-logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg class="nav-logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="36" height="36">
         <rect width="36" height="36" rx="10" fill="#0f0e12"/>
-        <!-- Leaf / energy motif -->
         <path d="M9 26C9 26 11 15 20 10C20 10 22 19 15 24" stroke="#2a7c4e" stroke-width="1.5" stroke-linecap="round"/>
         <path d="M15 24C15 24 18 21 20 10" stroke="#2a7c4e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
         <text x="22" y="28" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#c8a84b">B</text>
@@ -101,22 +169,33 @@
 
     <!-- Actions -->
     <div class="nav-actions">
-      <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+      <button class="lang-toggle" id="lang-toggle"
+              aria-label="Toggle language / Chuyển ngôn ngữ"
+              aria-pressed="false">
         <span class="lang-opt lang-vi active">VI</span>
-        <span class="lang-sep">|</span>
+        <span class="lang-sep" aria-hidden="true">|</span>
         <span class="lang-opt lang-en">EN</span>
       </button>
       <a href="#contact" class="btn-nav-cta" id="nav-cta">Liên hệ ngay</a>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="nav-hamburger" id="nav-hamburger"
+              aria-label="Mở menu điều hướng"
+              aria-expanded="false"
+              aria-controls="nav-mobile">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </button>
     </div>
   </div>
 </nav>
 
 <!-- Mobile Nav Overlay -->
-<div class="nav-mobile" id="nav-mobile" role="dialog" aria-label="Mobile navigation">
-  <button class="nav-close" id="nav-close" aria-label="Close menu">✕</button>
+<div class="nav-mobile" id="nav-mobile"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Menu điều hướng di động"
+     aria-hidden="true">
+  <button class="nav-close" id="nav-close" aria-label="Đóng menu">✕</button>
   <ul class="nav-mobile-links" role="list">
     <li><a href="#about"    id="m-nav-about">Về chúng tôi</a></li>
     <li><a href="#sectors"  id="m-nav-sectors">Lĩnh vực</a></li>
@@ -128,18 +207,28 @@
 
 
 <!-- ═══════════════════════════════════════════════
-     HERO
+     HERO — LCP Element
 ════════════════════════════════════════════════ -->
 <section class="hero" id="hero" aria-label="Hero section">
   <div class="hero-bg">
+    <!-- AVIF → WebP → PNG fallback, responsive srcset, NO lazy-load -->
     <picture>
-      <source srcset="assets/images/hero-bg.webp" type="image/webp" />
-      <img src="assets/images/hero-bg.png"
+      <source
+        type="image/avif"
+        srcset="assets/images/hero-bg-640.avif 640w,
+                assets/images/hero-bg-960.avif 960w"
+        sizes="100vw" />
+      <source
+        type="image/webp"
+        srcset="assets/images/hero-bg-640.webp 640w,
+                assets/images/hero-bg-960.webp 960w"
+        sizes="100vw" />
+      <img src="assets/images/hero-bg-960.webp"
            alt="Trang trại năng lượng mặt trời và điện gió tại Việt Nam"
+           width="960" height="640"
            loading="eager"
            fetchpriority="high"
-           decoding="sync"
-           width="1920" height="1080" />
+           decoding="async" />
     </picture>
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
@@ -180,7 +269,7 @@
 <!-- ═══════════════════════════════════════════════
      STATS BAR
 ════════════════════════════════════════════════ -->
-<section class="stats-bar" aria-label="Key statistics">
+<section class="stats-bar" aria-label="Thống kê hoạt động">
   <div class="container">
     <div class="stats-grid">
 
@@ -248,7 +337,7 @@
 
           <div class="about-value-item">
             <div class="value-icon" aria-hidden="true">
-              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18">
                 <path d="M9 2C9 2 4 6 4 10.5C4 13.5 6.3 16 9 16C11.7 16 14 13.5 14 10.5C14 6 9 2 9 2Z"/>
                 <path d="M9 16V10M9 10L6.5 7.5M9 10L11.5 7.5" opacity="0.5"/>
               </svg>
@@ -261,7 +350,7 @@
 
           <div class="about-value-item">
             <div class="value-icon" aria-hidden="true">
-              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18">
                 <circle cx="9" cy="9" r="7"/>
                 <path d="M9 5v4l3 3"/>
               </svg>
@@ -274,7 +363,7 @@
 
           <div class="about-value-item">
             <div class="value-icon" aria-hidden="true">
-              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18">
                 <rect x="2" y="5" width="14" height="10" rx="2"/>
                 <path d="M5 5V4a4 4 0 0 1 8 0v1"/>
                 <circle cx="9" cy="10" r="1.5" fill="currentColor" stroke="none"/>
@@ -289,15 +378,26 @@
         </div>
       </div>
 
-      <!-- Image -->
+      <!-- Image — below fold, lazy load OK -->
       <div class="about-image-wrap fade-in fade-in-delay-1">
         <picture>
-          <source srcset="assets/images/project-solar.webp" type="image/webp" />
-          <img src="assets/images/project-solar.png"
-               alt="Dự án điện mặt trời Bluesia"
+          <source
+            type="image/avif"
+            srcset="assets/images/project-solar-360.avif 360w,
+                    assets/images/project-solar-480.avif 480w,
+                    assets/images/project-solar-768.avif 768w"
+            sizes="(max-width: 768px) 100vw, 50vw" />
+          <source
+            type="image/webp"
+            srcset="assets/images/project-solar-360.webp 360w,
+                    assets/images/project-solar-480.webp 480w,
+                    assets/images/project-solar-768.webp 768w"
+            sizes="(max-width: 768px) 100vw, 50vw" />
+          <img src="assets/images/project-solar-480.webp"
+               alt="Dự án điện mặt trời Bluesia tại Việt Nam"
+               width="480" height="600"
                loading="lazy"
-               decoding="async"
-               width="800" height="600" />
+               decoding="async" />
         </picture>
         <div class="about-image-badge">
           <div class="about-badge-label" id="about-badge-label">Công suất lắp đặt</div>
@@ -336,7 +436,7 @@
       <!-- Solar -->
       <div class="sector-card green fade-in">
         <div class="sector-icon green-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="24" height="24">
             <circle cx="12" cy="12" r="4"/>
             <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
           </svg>
@@ -356,7 +456,7 @@
       <!-- Wind -->
       <div class="sector-card green fade-in fade-in-delay-1">
         <div class="sector-icon green-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="24" height="24">
             <path d="M12 2L12 12"/>
             <path d="M12 12 L4 6"/>
             <path d="M12 12 L18 18"/>
@@ -381,7 +481,7 @@
       <!-- Hydro -->
       <div class="sector-card gold fade-in fade-in-delay-2">
         <div class="sector-icon gold-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="24" height="24">
             <path d="M12 2C12 2 6 10 6 15C6 18.3 8.7 21 12 21C15.3 21 18 18.3 18 15C18 10 12 2 12 2Z"/>
             <path d="M8 17C9 18.5 10.5 19 12 19" opacity="0.5"/>
           </svg>
@@ -401,7 +501,7 @@
       <!-- Storage -->
       <div class="sector-card gold fade-in fade-in-delay-3">
         <div class="sector-icon gold-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="24" height="24">
             <rect x="6" y="4" width="12" height="16" rx="2"/>
             <path d="M9 4V2h6v2"/>
             <path d="M9 13l2 2 4-4" stroke-width="1.5"/>
@@ -445,20 +545,31 @@
 
       <!-- Project 1: Solar -->
       <article class="project-card fade-in" aria-labelledby="p1-name">
-        <div class="project-image">
+        <div class="project-image" style="aspect-ratio:3/2">
           <picture>
-            <source srcset="assets/images/project-solar.webp" type="image/webp" />
-            <img src="assets/images/project-solar.png"
-                 alt="Dự án Điện Mặt Trời Ninh Thuận"
+            <source
+              type="image/avif"
+              srcset="assets/images/project-solar-360.avif 360w,
+                      assets/images/project-solar-480.avif 480w,
+                      assets/images/project-solar-768.avif 768w"
+              sizes="(max-width: 768px) 100vw, 33vw" />
+            <source
+              type="image/webp"
+              srcset="assets/images/project-solar-360.webp 360w,
+                      assets/images/project-solar-480.webp 480w,
+                      assets/images/project-solar-768.webp 768w"
+              sizes="(max-width: 768px) 100vw, 33vw" />
+            <img src="assets/images/project-solar-480.webp"
+                 alt="Dự án Điện Mặt Trời Ninh Thuận 120MW"
+                 width="480" height="320"
                  loading="lazy"
-                 decoding="async"
-                 width="800" height="533" />
+                 decoding="async" />
           </picture>
           <span class="project-type-badge badge-solar" aria-label="Solar project">☀ Solar</span>
         </div>
         <div class="project-body">
-          <div class="project-location" aria-label="Location">
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <div class="project-location" aria-label="Địa điểm">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" width="12" height="12">
               <path d="M6 11s-4-4-4-6.5a4 4 0 0 1 8 0C10 7 6 11 6 11z"/>
               <circle cx="6" cy="4.5" r="1.3" fill="currentColor" stroke="none"/>
             </svg>
@@ -483,20 +594,31 @@
 
       <!-- Project 2: Wind -->
       <article class="project-card fade-in fade-in-delay-1" aria-labelledby="p2-name">
-        <div class="project-image">
+        <div class="project-image" style="aspect-ratio:3/2">
           <picture>
-            <source srcset="assets/images/project-wind.webp" type="image/webp" />
-            <img src="assets/images/project-wind.png"
-                 alt="Dự án Điện Gió Bình Thuận"
+            <source
+              type="image/avif"
+              srcset="assets/images/project-wind-360.avif 360w,
+                      assets/images/project-wind-480.avif 480w,
+                      assets/images/project-wind-768.avif 768w"
+              sizes="(max-width: 768px) 100vw, 33vw" />
+            <source
+              type="image/webp"
+              srcset="assets/images/project-wind-360.webp 360w,
+                      assets/images/project-wind-480.webp 480w,
+                      assets/images/project-wind-768.webp 768w"
+              sizes="(max-width: 768px) 100vw, 33vw" />
+            <img src="assets/images/project-wind-480.webp"
+                 alt="Dự án Điện Gió Bình Thuận 80MW"
+                 width="480" height="320"
                  loading="lazy"
-                 decoding="async"
-                 width="800" height="533" />
+                 decoding="async" />
           </picture>
           <span class="project-type-badge badge-wind" aria-label="Wind project">⚡ Wind</span>
         </div>
         <div class="project-body">
-          <div class="project-location">
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <div class="project-location" aria-label="Địa điểm">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" width="12" height="12">
               <path d="M6 11s-4-4-4-6.5a4 4 0 0 1 8 0C10 7 6 11 6 11z"/>
               <circle cx="6" cy="4.5" r="1.3" fill="currentColor" stroke="none"/>
             </svg>
@@ -521,20 +643,31 @@
 
       <!-- Project 3: Hydro -->
       <article class="project-card fade-in fade-in-delay-2" aria-labelledby="p3-name">
-        <div class="project-image">
+        <div class="project-image" style="aspect-ratio:3/2">
           <picture>
-            <source srcset="assets/images/project-hydro.webp" type="image/webp" />
-            <img src="assets/images/project-hydro.png"
-                 alt="Thủy Điện Lào Cai"
+            <source
+              type="image/avif"
+              srcset="assets/images/project-hydro-360.avif 360w,
+                      assets/images/project-hydro-480.avif 480w,
+                      assets/images/project-hydro-768.avif 768w"
+              sizes="(max-width: 768px) 100vw, 33vw" />
+            <source
+              type="image/webp"
+              srcset="assets/images/project-hydro-360.webp 360w,
+                      assets/images/project-hydro-480.webp 480w,
+                      assets/images/project-hydro-768.webp 768w"
+              sizes="(max-width: 768px) 100vw, 33vw" />
+            <img src="assets/images/project-hydro-480.webp"
+                 alt="Thủy Điện Lào Cai 40MW"
+                 width="480" height="320"
                  loading="lazy"
-                 decoding="async"
-                 width="800" height="533" />
+                 decoding="async" />
           </picture>
           <span class="project-type-badge badge-hydro" aria-label="Hydro project">💧 Hydro</span>
         </div>
         <div class="project-body">
-          <div class="project-location">
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <div class="project-location" aria-label="Địa điểm">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" width="12" height="12">
               <path d="M6 11s-4-4-4-6.5a4 4 0 0 1 8 0C10 7 6 11 6 11z"/>
               <circle cx="6" cy="4.5" r="1.3" fill="currentColor" stroke="none"/>
             </svg>
@@ -656,7 +789,7 @@
 
           <div class="contact-detail">
             <div class="contact-detail-icon" aria-hidden="true">
-              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18">
                 <path d="M9 2C6.8 2 5 3.8 5 6C5 9.8 9 16 9 16C9 16 13 9.8 13 6C13 3.8 11.2 2 9 2Z"/>
                 <circle cx="9" cy="6" r="1.5" fill="currentColor" stroke="none"/>
               </svg>
@@ -669,26 +802,30 @@
 
           <div class="contact-detail">
             <div class="contact-detail-icon" aria-hidden="true">
-              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18">
                 <rect x="2" y="4" width="14" height="10" rx="2"/>
                 <path d="M2 7l7 5 7-5"/>
               </svg>
             </div>
             <div>
               <div class="contact-detail-label" id="email-label">Email</div>
-              <div class="contact-detail-value" id="email-val">invest@bluesia.net</div>
+              <div class="contact-detail-value" id="email-val">
+                <a href="mailto:invest@bluesia.net" aria-label="Gửi email đến invest@bluesia.net">invest@bluesia.net</a>
+              </div>
             </div>
           </div>
 
           <div class="contact-detail">
             <div class="contact-detail-icon" aria-hidden="true">
-              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18">
                 <path d="M3 3.5C3 3.5 5 2 7 4.5C8 5.8 7 7 7 7C7 7 8 9 11 11C11 11 12.2 10 13.5 11C16 13 14.5 15 14.5 15C12 18 3 11 3 3.5Z"/>
               </svg>
             </div>
             <div>
               <div class="contact-detail-label" id="phone-label">Điện thoại</div>
-              <div class="contact-detail-value" id="phone-val">+84 28 3822 0000</div>
+              <div class="contact-detail-value" id="phone-val">
+                <a href="tel:+842838220000" aria-label="Gọi điện cho Bluesia">+84 28 3822 0000</a>
+              </div>
             </div>
           </div>
 
@@ -700,26 +837,35 @@
         <h3 class="form-title" id="form-title">Gửi yêu cầu hợp tác</h3>
         <p class="form-subtitle" id="form-sub">Chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc.</p>
 
-        <form id="contact-form" novalidate aria-label="Contact form">
+        <form id="contact-form" novalidate aria-label="Form liên hệ hợp tác">
           <div class="form-row">
             <div class="form-group">
               <label for="input-name" id="f-name">Họ và tên</label>
-              <input type="text" id="input-name" name="name" autocomplete="name" required />
+              <input type="text" id="input-name" name="name"
+                     autocomplete="name" required
+                     aria-required="true"
+                     aria-describedby="f-name" />
             </div>
             <div class="form-group">
               <label for="input-email" id="f-email">Email doanh nghiệp</label>
-              <input type="email" id="input-email" name="email" autocomplete="email" required />
+              <input type="email" id="input-email" name="email"
+                     autocomplete="email" required
+                     aria-required="true"
+                     aria-describedby="f-email" />
             </div>
           </div>
 
           <div class="form-group">
             <label for="input-company" id="f-company">Công ty / Tổ chức</label>
-            <input type="text" id="input-company" name="company" autocomplete="organization" required />
+            <input type="text" id="input-company" name="company"
+                   autocomplete="organization" required
+                   aria-required="true"
+                   aria-describedby="f-company" />
           </div>
 
           <div class="form-group">
             <label for="input-interest" id="f-interest">Lĩnh vực quan tâm</label>
-            <select id="input-interest" name="interest">
+            <select id="input-interest" name="interest" aria-describedby="f-interest">
               <option value="" disabled selected></option>
               <option value="solar"   id="int-solar">Điện Mặt Trời</option>
               <option value="wind"    id="int-wind">Điện Gió</option>
@@ -732,18 +878,22 @@
           <div class="form-group">
             <label for="f-msg-input" id="f-msg-label">Nội dung</label>
             <textarea id="f-msg-input" name="message" rows="4"
-              placeholder="Mô tả ngắn về kế hoạch đầu tư hoặc câu hỏi của bạn..."></textarea>
+              placeholder="Mô tả ngắn về kế hoạch đầu tư hoặc câu hỏi của bạn..."
+              aria-describedby="f-msg-label"></textarea>
           </div>
+
+          <!-- Form error/status region (pre-reserved height avoids CLS) -->
+          <div id="form-status" role="alert" aria-live="polite" style="min-height:1.5rem"></div>
 
           <button type="submit" class="btn-submit" id="f-submit">
             <span>Gửi yêu cầu</span>
           </button>
         </form>
 
-        <!-- Success state -->
-        <div class="form-success" id="form-success" aria-live="polite">
+        <!-- Success state (hidden until form submits) -->
+        <div class="form-success" id="form-success" aria-live="polite" aria-atomic="true" hidden>
           <div class="success-icon" aria-hidden="true">
-            <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="28" height="28">
               <circle cx="14" cy="14" r="12"/>
               <path d="M8 14l4 4 8-8"/>
             </svg>
@@ -767,8 +917,8 @@
 
       <!-- Brand col -->
       <div class="footer-brand">
-        <a href="#hero" class="nav-brand" style="margin-bottom:0;" aria-label="Bluesia">
-          <svg class="nav-logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <a href="#hero" class="nav-brand" style="margin-bottom:0;" aria-label="Bluesia — Về trang chủ">
+          <svg class="nav-logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="36" height="36">
             <rect width="36" height="36" rx="10" fill="#1a1918"/>
             <path d="M9 26C9 26 11 15 20 10C20 10 22 19 15 24" stroke="#2a7c4e" stroke-width="1.5" stroke-linecap="round"/>
             <path d="M15 24C15 24 18 21 20 10" stroke="#2a7c4e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
@@ -782,37 +932,37 @@
         <p class="footer-brand-desc" id="ft-tagline">
           Nhà đầu tư năng lượng tái tạo hàng đầu Việt Nam.
         </p>
-        <div class="footer-social" aria-label="Social links">
-          <!-- LinkedIn -->
-          <a href="https://linkedin.com" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <nav class="footer-social" aria-label="Mạng xã hội Bluesia">
+          <a href="https://linkedin.com" class="social-link" aria-label="Bluesia trên LinkedIn"
+             target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" width="16" height="16">
               <path d="M2.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM1 6h3v9H1V6zm5 0h2.9v1.2h.04C9.3 6.6 10.3 6 11.5 6c3 0 3.5 2 3.5 4.6V15h-3v-3.9c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3V15H6V6z"/>
             </svg>
           </a>
-          <!-- Facebook -->
-          <a href="https://facebook.com" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <a href="https://facebook.com" class="social-link" aria-label="Bluesia trên Facebook"
+             target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" width="16" height="16">
               <path d="M16 8a8 8 0 1 0-9.25 7.9V10.3H4.7V8h2.05V6.3c0-2 1.2-3.1 3-3.1.88 0 1.8.16 1.8.16V5.4h-1c-1 0-1.3.6-1.3 1.2V8h2.2l-.35 2.3H9.25V15.9A8 8 0 0 0 16 8z"/>
             </svg>
           </a>
-          <!-- X/Twitter -->
-          <a href="https://x.com" class="social-link" aria-label="X (Twitter)" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <a href="https://x.com" class="social-link" aria-label="Bluesia trên X (Twitter)"
+             target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" width="16" height="16">
               <path d="M12.6.75h2.45l-5.35 6.12L16 15.25h-4.93l-3.86-5.05-4.42 5.05H.33l5.73-6.54L0 .75h5.06l3.49 4.62L12.6.75zm-.86 13.01h1.36L4.27 2.11H2.8l8.94 11.65z"/>
             </svg>
           </a>
-        </div>
+        </nav>
       </div>
 
       <!-- Navigation col -->
       <div>
         <div class="footer-col-title" id="ft-nav">Điều hướng</div>
         <ul class="footer-links">
-          <li><a href="#about" id="ft-a-about">Về chúng tôi</a></li>
-          <li><a href="#sectors" id="ft-a-sectors">Lĩnh vực đầu tư</a></li>
+          <li><a href="#about"    id="ft-a-about">Về chúng tôi</a></li>
+          <li><a href="#sectors"  id="ft-a-sectors">Lĩnh vực đầu tư</a></li>
           <li><a href="#projects" id="ft-a-projects">Dự án tiêu biểu</a></li>
-          <li><a href="#why" id="ft-a-why">Tại sao Bluesia</a></li>
-          <li><a href="#contact" id="ft-a-contact">Liên hệ</a></li>
+          <li><a href="#why"      id="ft-a-why">Tại sao Bluesia</a></li>
+          <li><a href="#contact"  id="ft-a-contact">Liên hệ</a></li>
         </ul>
       </div>
 
@@ -831,8 +981,8 @@
       <div>
         <div class="footer-col-title" id="ft-legal">Pháp lý</div>
         <ul class="footer-links">
-          <li><a href="#" id="ft-privacy">Chính sách bảo mật</a></li>
-          <li><a href="#" id="ft-terms">Điều khoản sử dụng</a></li>
+          <li><a href="/privacy.html" id="ft-privacy">Chính sách bảo mật</a></li>
+          <li><a href="/terms.html"   id="ft-terms">Điều khoản sử dụng</a></li>
         </ul>
       </div>
 
@@ -843,13 +993,14 @@
         © 2026 Bluesia Investment Group. Tất cả quyền được bảo lưu.
       </p>
       <ul class="footer-legal">
-        <li><a href="#" id="ft-l-privacy">Privacy</a></li>
-        <li><a href="#" id="ft-l-terms">Terms</a></li>
+        <li><a href="/privacy.html" id="ft-l-privacy">Privacy</a></li>
+        <li><a href="/terms.html"   id="ft-l-terms">Terms</a></li>
       </ul>
     </div>
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- ── JS: deferred, non-blocking ─────────────────────────── -->
+<script src="js/main.js" defer></script>
 </body>
 </html>

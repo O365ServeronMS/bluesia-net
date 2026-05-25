@@ -1,0 +1,13 @@
+{
+  "name": "bluesia-net",
+  "version": "1.0.0",
+  "description": "Bluesia.net landing page — static site",
+  "type": "module",
+  "scripts": {
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "build": "npm run optimize:images"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}
