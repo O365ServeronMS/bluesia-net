@@ -1,0 +1,19 @@
+# Git
+.git
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (nếu dùng sau này)
+node_modules/
+
+# Logs
+*.log

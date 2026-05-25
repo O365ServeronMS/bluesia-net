@@ -1,0 +1,22 @@
+# Git
+.git
+.gitignore
+
+# Design / source files
+DESIGN.md
+tokens.json
+theme.css
+variables.css
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode
+*.md
