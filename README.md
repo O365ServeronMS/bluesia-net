@@ -11,7 +11,7 @@ Landing page doanh nghiệp cho Bluesia Investment Group, build bằng Astro sta
 - Astro static output
 - Vanilla CSS và vanilla JavaScript
 - Sharp để tạo ảnh AVIF/WebP responsive ở build time
-- Cloudflare Pages để serve static assets
+- Cloudflare Workers Static Assets để serve static assets
 
 ## Cấu trúc
 
@@ -30,6 +30,7 @@ bluesia-net/
 │  └─ styles/
 ├─ scripts/optimize-images.mjs
 ├─ astro.config.mjs
+├─ wrangler.jsonc
 └─ package.json
 ```
 
@@ -49,7 +50,7 @@ npm run preview
 
 `npm run build` sẽ chạy `optimize:images` trước, sau đó build Astro vào thư mục `dist/`.
 
-## Cloudflare Pages
+## Cloudflare Workers Static Assets
 
 Thiết lập project:
 
@@ -58,7 +59,9 @@ Framework preset: Astro
 Build command: npm run build
 Build output directory: dist
 Production branch: main
-Deploy command: để trống
+Deploy command: npx wrangler deploy
+Non-production branch deploy command: npx wrangler versions upload
+Path: /
 ```
 
 Custom domains:
@@ -66,7 +69,7 @@ Custom domains:
 - `bluesia.net`
 - `www.bluesia.net`
 
-Không dùng `npx wrangler deploy` cho Cloudflare Pages project này. Pages chỉ cần build ra `dist/`; Cloudflare tự publish output directory.
+Project này dùng Workers Builds, nên Deploy command là bắt buộc. `wrangler.jsonc` cấu hình `dist/` là Workers Static Assets directory.
 
 Redirect `www.bluesia.net` về `bluesia.net` nên cấu hình bằng Cloudflare Redirect Rule:
 
@@ -89,7 +92,7 @@ Landing page hiện có ít ảnh cố định, nên build-time optimization nha
 
 ## Cloudflare Free Services Nên Dùng
 
-- Cloudflare Pages cho static hosting
+- Cloudflare Workers Static Assets cho static hosting
 - Cloudflare Web Analytics
 - Brotli
 - HTTP/3
@@ -101,4 +104,4 @@ Không cần Pages Functions trong phase này.
 
 ## Legacy VPS/Docker
 
-Các file `Dockerfile`, `docker-compose.yml`, `Caddyfile` và `Caddyfile.docker` được giữ lại để tham chiếu triển khai cũ. Đường triển khai mặc định từ v2.0.0 là Cloudflare Pages.
+Các file `Dockerfile`, `docker-compose.yml`, `Caddyfile` và `Caddyfile.docker` được giữ lại để tham chiếu triển khai cũ. Đường triển khai mặc định từ v2.0.0 là Cloudflare Workers Static Assets.
