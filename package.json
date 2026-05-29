@@ -7,10 +7,15 @@
     "optimize:images": "node scripts/optimize-images.mjs",
     "dev": "astro dev",
     "build": "npm run optimize:images && astro build",
-    "preview": "astro preview"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
     "astro": "^5.8.0",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "wrangler": "^4.95.0"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "12"
   }
 }

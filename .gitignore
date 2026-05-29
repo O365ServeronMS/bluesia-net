@@ -22,3 +22,10 @@ dist/
 
 # Raw assets
 assets/images/*.png
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
