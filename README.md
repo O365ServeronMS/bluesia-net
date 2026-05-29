@@ -19,7 +19,6 @@ Landing page doanh nghiệp cho Bluesia Investment Group, build bằng Astro sta
 bluesia-net/
 ├─ public/
 │  ├─ _headers
-│  ├─ _redirects
 │  ├─ robots.txt
 │  ├─ sitemap.xml
 │  └─ assets/images/
@@ -59,6 +58,7 @@ Framework preset: Astro
 Build command: npm run build
 Build output directory: dist
 Production branch: main
+Deploy command: để trống
 ```
 
 Custom domains:
@@ -66,7 +66,16 @@ Custom domains:
 - `bluesia.net`
 - `www.bluesia.net`
 
-`public/_redirects` hiện redirect `www.bluesia.net` về `bluesia.net`.
+Không dùng `npx wrangler deploy` cho Cloudflare Pages project này. Pages chỉ cần build ra `dist/`; Cloudflare tự publish output directory.
+
+Redirect `www.bluesia.net` về `bluesia.net` nên cấu hình bằng Cloudflare Redirect Rule:
+
+```txt
+If: hostname equals "www.bluesia.net"
+Then: Static redirect to "https://bluesia.net${uri.path}"
+Status code: 301
+Preserve query string: enabled
+```
 
 ## Image Optimization
 
