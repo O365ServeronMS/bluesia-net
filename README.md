@@ -1,107 +1,95 @@
-# Bluesia.net — Landing Page
+# Bluesia.net
 
-Trang landing page cho **Bluesia Investment Group** — nhà đầu tư năng lượng tái tạo hàng đầu Việt Nam.
+Landing page doanh nghiệp cho Bluesia Investment Group, build bằng Astro static output và deploy tối ưu trên Cloudflare Pages.
 
-## 🌐 URL
-[https://bluesia.net](https://bluesia.net)
+## Phiên bản
 
-## 🗂️ Cấu trúc
+`2.0.0` chuyển site từ HTML/CSS/JS tĩnh thủ công sang Astro static site. Mục tiêu là giữ trải nghiệm hiện tại, giảm rủi ro runtime, và tối ưu tốc độ cho landing page doanh nghiệp.
 
-```
+## Stack
+
+- Astro static output
+- Vanilla CSS và vanilla JavaScript
+- Sharp để tạo ảnh AVIF/WebP responsive ở build time
+- Cloudflare Pages để serve static assets
+
+## Cấu trúc
+
+```txt
 bluesia-net/
-├── index.html              # Landing page chính (song ngữ VI/EN)
-├── css/
-│   ├── variables.css       # Design tokens: colors, spacing, radii
-│   ├── base.css            # Reset, typography, utilities
-│   └── main.css            # Full page styles
-├── js/
-│   └── main.js             # Interactions, i18n, scroll, form
-├── assets/
-│   └── images/
-│       ├── hero-bg.png     # Hero background
-│       ├── project-solar.png
-│       ├── project-wind.png
-│       └── project-hydro.png
-├── Dockerfile
-├── nginx.conf
-├── docker-compose.yml
-└── .dockerignore
+├─ public/
+│  ├─ _headers
+│  ├─ _redirects
+│  ├─ robots.txt
+│  ├─ sitemap.xml
+│  └─ assets/images/
+├─ src/
+│  ├─ components/LandingPage.astro
+│  ├─ layouts/BaseLayout.astro
+│  ├─ pages/index.astro
+│  ├─ scripts/main.js
+│  └─ styles/
+├─ scripts/optimize-images.mjs
+├─ astro.config.mjs
+└─ package.json
 ```
 
-## 🚀 Deploy lên VPS
-
-### Yêu cầu
-- Docker & Docker Compose đã cài trên VPS
-- Domain `bluesia.net` trỏ A record về IP VPS
-
-### Bước 1 — Copy code lên VPS
-```bash
-# Dùng rsync hoặc git
-rsync -avz --exclude='.git' ./ user@your-vps-ip:/opt/bluesia/
-
-# Hoặc clone từ git
-git clone <repo-url> /opt/bluesia/
-```
-
-### Bước 2 — Build & Run
-```bash
-cd /opt/bluesia
-docker compose up -d --build
-```
-
-### Bước 3 — Kiểm tra
-```bash
-docker compose ps
-docker compose logs web
-curl -I http://localhost
-```
-
-## 🔒 HTTPS (với Certbot + Nginx ngoài)
-
-Nếu dùng Nginx reverse proxy trên host:
-
-```nginx
-server {
-    listen 443 ssl;
-    server_name bluesia.net www.bluesia.net;
-    
-    ssl_certificate /etc/letsencrypt/live/bluesia.net/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/bluesia.net/privkey.pem;
-
-    location / {
-        proxy_pass http://localhost:80;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-
-server {
-    listen 80;
-    server_name bluesia.net www.bluesia.net;
-    return 301 https://$host$request_uri;
-}
-```
+## Local Development
 
 ```bash
-# Cài SSL
-certbot --nginx -d bluesia.net -d www.bluesia.net
+npm install
+npm run dev
 ```
 
-## 🎨 Design System
+Build production:
 
-| Token | Value | Dùng cho |
-|-------|-------|----------|
-| `--color-cloud-chalk` | `#f0efe9` | Nền trang |
-| `--color-nightfall-onyx` | `#0f0e12` | Text chính, footer |
-| `--color-green` | `#2a7c4e` | Accent xanh lá (sustainability) |
-| `--color-gold` | `#c8a84b` | Accent vàng (luxury) |
+```bash
+npm run build
+npm run preview
+```
 
-## 📱 Responsive
-- Desktop: 1280px+
-- Tablet: 768px–1024px  
-- Mobile: <640px
+`npm run build` sẽ chạy `optimize:images` trước, sau đó build Astro vào thư mục `dist/`.
 
-## 🌍 Ngôn ngữ
-Song ngữ VI/EN, toggle ở navigation bar.
+## Cloudflare Pages
+
+Thiết lập project:
+
+```txt
+Framework preset: Astro
+Build command: npm run build
+Build output directory: dist
+Production branch: main
+```
+
+Custom domains:
+
+- `bluesia.net`
+- `www.bluesia.net`
+
+`public/_redirects` hiện redirect `www.bluesia.net` về `bluesia.net`.
+
+## Image Optimization
+
+Ảnh được tối ưu ở build time bằng Sharp:
+
+- AVIF
+- WebP
+- nhiều kích thước responsive
+
+Landing page hiện có ít ảnh cố định, nên build-time optimization nhanh và rẻ hơn dùng Cloudflare Images Transformations. R2 chỉ nên dùng sau này cho media lớn như PDF, brochure, gallery ảnh lớn hoặc video assets.
+
+## Cloudflare Free Services Nên Dùng
+
+- Cloudflare Pages cho static hosting
+- Cloudflare Web Analytics
+- Brotli
+- HTTP/3
+- Early Hints
+- Always Use HTTPS
+- Cache headers trong `public/_headers`
+
+Không cần Pages Functions trong phase này.
+
+## Legacy VPS/Docker
+
+Các file `Dockerfile`, `docker-compose.yml`, `Caddyfile` và `Caddyfile.docker` được giữ lại để tham chiếu triển khai cũ. Đường triển khai mặc định từ v2.0.0 là Cloudflare Pages.

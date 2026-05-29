@@ -13,7 +13,7 @@ import { fileURLToPath } from 'url';
 
 const __dir = path.dirname(fileURLToPath(import.meta.url));
 const ROOT  = path.resolve(__dir, '..');
-const INPUT = path.join(ROOT, 'assets', 'images');
+const INPUT = path.join(ROOT, 'public', 'assets', 'images');
 const OUTPUT = INPUT; // same dir, different filenames
 
 const CONFIGS = {
