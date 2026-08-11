@@ -3,6 +3,11 @@
   "version": "2.0.0",
   "description": "Bluesia.net landing page - Astro static site",
   "type": "module",
+  "packageManager": "npm@11.4.2",
+  "engines": {
+    "node": ">=24.18.0",
+    "npm": ">=11.4.2"
+  },
   "scripts": {
     "optimize:images": "node scripts/optimize-images.mjs",
     "dev": "astro dev",
@@ -10,7 +15,7 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "^5.8.0",
-    "sharp": "^0.33.5"
+    "astro": "^5.18.2",
+    "sharp": "^0.34.5"
   }
 }

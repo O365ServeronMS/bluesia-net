@@ -101,6 +101,7 @@ const i18n = {
     f_interest:   'Lĩnh vực quan tâm',
     f_msg:        'Nội dung',
     f_submit:     'Gửi yêu cầu',
+    f_turnstile:  'Vui lòng hoàn tất bước xác minh bảo mật.',
     f_msg_ph:     'Mô tả ngắn về kế hoạch đầu tư hoặc câu hỏi của bạn...',
     int_solar:    'Điện Mặt Trời',
     int_wind:     'Điện Gió',
@@ -215,6 +216,7 @@ const i18n = {
     f_interest:   'Area of Interest',
     f_msg:        'Message',
     f_submit:     'Send Inquiry',
+    f_turnstile:  'Please complete the security verification.',
     f_msg_ph:     'Briefly describe your investment plan or question...',
     int_solar:    'Solar Power',
     int_wind:     'Wind Power',
@@ -553,6 +555,16 @@ function initContactForm() {
       if (emailInput) shakeInput(emailInput);
       return;
     }
+
+    const turnstileToken = new FormData(form).get('cf-turnstile-response');
+    if (!turnstileToken) {
+      const status = form.querySelector('#form-status');
+      if (status) status.textContent = t.f_turnstile;
+      return;
+    }
+
+    const status = form.querySelector('#form-status');
+    if (status) status.textContent = '';
 
     // Simulate submission
     if (btn) {
