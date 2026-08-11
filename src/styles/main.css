@@ -1206,6 +1206,16 @@
   -webkit-appearance: none;
 }
 
+.turnstile-wrap {
+  min-height: 65px;
+  margin-top: var(--s-2);
+  overflow: hidden;
+}
+
+.cf-turnstile {
+  width: 100%;
+}
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
