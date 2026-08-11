@@ -17,5 +17,12 @@ node_modules/
 dist/
 .astro/
 
+# Cloudflare Workers local state and secrets
+.wrangler/
+.wrangler-dist/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
 # Logs
 *.log

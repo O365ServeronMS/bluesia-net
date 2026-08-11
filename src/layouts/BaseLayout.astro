@@ -125,7 +125,13 @@ import '../styles/main.css';
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230f0e12'/><text x='16' y='22' font-family='Inter,sans-serif' font-size='18' font-weight='700' fill='%23c8a84b' text-anchor='middle'>B</text></svg>" />
 
   <!-- Cloudflare Turnstile: loaded asynchronously for the contact form. -->
-  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script
+    is:inline
+    id="turnstile-script"
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+    async
+    defer
+  ></script>
 </head>
 <body>
   <slot />

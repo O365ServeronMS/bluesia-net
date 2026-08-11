@@ -102,6 +102,7 @@ const i18n = {
     f_msg:        'Nội dung',
     f_submit:     'Gửi yêu cầu',
     f_turnstile:  'Vui lòng hoàn tất bước xác minh bảo mật.',
+    f_submit_error:'Không thể gửi yêu cầu. Vui lòng xác minh lại và thử lần nữa.',
     f_msg_ph:     'Mô tả ngắn về kế hoạch đầu tư hoặc câu hỏi của bạn...',
     int_solar:    'Điện Mặt Trời',
     int_wind:     'Điện Gió',
@@ -217,6 +218,7 @@ const i18n = {
     f_msg:        'Message',
     f_submit:     'Send Inquiry',
     f_turnstile:  'Please complete the security verification.',
+    f_submit_error:'Unable to submit. Please verify again and retry.',
     f_msg_ph:     'Briefly describe your investment plan or question...',
     int_solar:    'Solar Power',
     int_wind:     'Wind Power',
@@ -534,13 +536,38 @@ function initContactForm() {
   const success = document.getElementById('form-success');
   if (!form) return;
 
+  const turnstileContainer = form.querySelector('#contact-turnstile');
+  const turnstileScript = document.getElementById('turnstile-script');
+  let turnstileWidgetId;
+  let turnstileToken = '';
+
+  const renderTurnstile = () => {
+    if (!turnstileContainer || turnstileWidgetId !== undefined || !window.turnstile) return;
+
+    turnstileWidgetId = window.turnstile.render(turnstileContainer, {
+      sitekey: turnstileContainer.dataset.sitekey,
+      action: turnstileContainer.dataset.action,
+      theme: turnstileContainer.dataset.theme,
+      size: turnstileContainer.dataset.size,
+      'response-field': false,
+      callback: (token) => { turnstileToken = token; },
+      'expired-callback': () => { turnstileToken = ''; },
+      'timeout-callback': () => { turnstileToken = ''; },
+      'error-callback': () => { turnstileToken = ''; },
+    });
+  };
+
+  if (window.turnstile) renderTurnstile();
+  else turnstileScript?.addEventListener('load', renderTurnstile, { once: true });
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const btn = form.querySelector('#f-submit');
-    const t   = i18n[currentLang];
+    const status = form.querySelector('#form-status');
+    const t = i18n[currentLang];
+    if (btn?.disabled) return;
 
-    // Simple validation
     const name    = form.querySelector('#input-name')?.value.trim();
     const email   = form.querySelector('#input-email')?.value.trim();
     const company = form.querySelector('#input-company')?.value.trim();
@@ -556,28 +583,49 @@ function initContactForm() {
       return;
     }
 
-    const turnstileToken = new FormData(form).get('cf-turnstile-response');
     if (!turnstileToken) {
-      const status = form.querySelector('#form-status');
       if (status) status.textContent = t.f_turnstile;
       return;
     }
 
-    const status = form.querySelector('#form-status');
     if (status) status.textContent = '';
-
-    // Simulate submission
     if (btn) {
       btn.disabled = true;
       btn.querySelector('span').textContent = '...';
     }
 
-    await delay(1200);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          interest: form.querySelector('#input-interest')?.value ?? '',
+          message: form.querySelector('#f-msg-input')?.value.trim() ?? '',
+          'cf-turnstile-response': turnstileToken,
+        }),
+      });
+      if (!response.ok) throw new Error('contact endpoint ' + response.status);
 
-    form.style.display = 'none';
-    if (success) {
-      success.removeAttribute('hidden');
-      success.classList.add('show');
+      form.style.display = 'none';
+      if (success) {
+        success.removeAttribute('hidden');
+        success.classList.add('show');
+      }
+    } catch {
+      if (status) status.textContent = t.f_submit_error;
+      turnstileToken = '';
+      if (turnstileWidgetId !== undefined) window.turnstile?.reset(turnstileWidgetId);
+      if (btn) {
+        btn.disabled = false;
+        btn.querySelector('span').textContent = t.f_submit;
+      }
     }
   });
 }
@@ -603,4 +651,3 @@ function shakeInput(el) {
 }
 
 const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-const delay = ms => new Promise(res => setTimeout(res, ms));
