@@ -1,6 +1,6 @@
 # Bluesia.net
 
-Landing page doanh nghiệp cho Bluesia Investment Group, build bằng Astro static output và deploy tối ưu trên Cloudflare Pages.
+Landing page doanh nghiệp cho Bluesia Investment Group, build bằng Astro static output và deploy trên Cloudflare Workers Static Assets.
 
 ## Phiên bản
 
@@ -10,7 +10,7 @@ Landing page doanh nghiệp cho Bluesia Investment Group, build bằng Astro sta
 
 - Astro static output
 - Vanilla CSS và vanilla JavaScript
-- Sharp để tạo ảnh AVIF/WebP responsive ở build time
+- Ảnh AVIF/WebP responsive đã được tối ưu sẵn
 - Cloudflare Workers Static Assets để serve static assets
 
 ## Cấu trúc
@@ -28,7 +28,6 @@ bluesia-net/
 │  ├─ pages/index.astro
 │  ├─ scripts/main.js
 │  └─ styles/
-├─ scripts/optimize-images.mjs
 ├─ astro.config.mjs
 ├─ wrangler.jsonc
 └─ package.json
@@ -48,7 +47,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` sẽ chạy `optimize:images` trước, sau đó build Astro vào thư mục `dist/`.
+`npm run build` tạo static output trong thư mục `dist/`.
 
 ## Cloudflare Workers Static Assets
 
@@ -80,15 +79,9 @@ Status code: 301
 Preserve query string: enabled
 ```
 
-## Image Optimization
+## Image Assets
 
-Ảnh được tối ưu ở build time bằng Sharp:
-
-- AVIF
-- WebP
-- nhiều kích thước responsive
-
-Landing page hiện có ít ảnh cố định, nên build-time optimization nhanh và rẻ hơn dùng Cloudflare Images Transformations. R2 chỉ nên dùng sau này cho media lớn như PDF, brochure, gallery ảnh lớn hoặc video assets.
+Repository chỉ lưu các ảnh AVIF/WebP responsive thực sự được trang sử dụng. CI không chạy lại image optimization, nhờ đó Cloudflare build nhanh hơn và không cần giữ các ảnh PNG nguồn trùng lặp.
 
 ## Cloudflare Free Services Nên Dùng
 
@@ -101,7 +94,3 @@ Landing page hiện có ít ảnh cố định, nên build-time optimization nha
 - Cache headers trong `public/_headers`
 
 Không cần Pages Functions trong phase này.
-
-## Legacy VPS/Docker
-
-Các file `Dockerfile`, `docker-compose.yml`, `Caddyfile` và `Caddyfile.docker` được giữ lại để tham chiếu triển khai cũ. Đường triển khai mặc định từ v2.0.0 là Cloudflare Workers Static Assets.

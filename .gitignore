@@ -12,13 +12,10 @@ desktop.ini
 *.swp
 *.swo
 
-# Node (nếu dùng sau này)
+# Node / Astro build output
 node_modules/
 dist/
 .astro/
 
 # Logs
 *.log
-
-# Raw assets
-assets/images/*.png
