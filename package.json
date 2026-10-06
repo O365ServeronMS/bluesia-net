@@ -3,10 +3,10 @@
   "version": "2.0.0",
   "description": "Bluesia.net landing page - Astro static site",
   "type": "module",
-  "packageManager": "npm@12.0.2",
+  "packageManager": "npm@12.2.0",
   "engines": {
-    "node": ">=26.7.0",
-    "npm": ">=12.0.2"
+    "node": ">=26.10.0",
+    "npm": ">=12.2.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -18,12 +18,12 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "astro": "^7.3.3",
+    "astro": "^7.3.5",
     "typescript": "^6.0.3",
-    "wrangler": "^4.136.1"
+    "wrangler": "^4.147.0"
   },
   "allowScripts": {
     "esbuild@0.28.1 || 0.28.2": true,
-    "workerd@1.20260921.1": true
+    "workerd@1.20261001.1": true
   }
 }
